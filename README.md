@@ -1,6 +1,6 @@
 # Google Tag Manager Server Client-Template for Tagless Requests of Google Ad Manager
 
-This serverside Google Tag Manager Client-Template lets you perform a ad request to Google Ad Manager without using Google Publisher Tags in the Frontend. Please read more about Google Ad Manager Tagless Request here:
+This serverside Google Tag Manager Client-Template lets you perform an ad request to Google Ad Manager without using Google Publisher Tags in the Frontend. Please read more about Google Ad Manager Tagless Request here:
 
 - Google Ad Manager Help: https://support.google.com/admanager/answer/2623168?hl=en
 - demirjasarevic.com Blog (German): https://www.demirjasarevic.com/google-ad-manager-tagless-request/
