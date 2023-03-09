@@ -6,7 +6,6 @@
   "version": 1,
   "securityGroups": [],
   "displayName": "Google Ad Manager - Tagless Request",
-  "categories": ["TAG_MANAGEMENT", "MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": ""
@@ -126,6 +125,13 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Mobile Ad",
         "simpleValueType": true,
         "help": "Set an indicator, that the request is a mobile ad request."
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "impressionTracking",
+        "checkboxText": "Activate Impression Tracking",
+        "simpleValueType": true,
+        "help": "If enabled you can track downloaded impressions, also known as \"delayed\" impressions."
       }
     ]
   },
@@ -211,6 +217,10 @@ if (data.mobileAd) {
   requestUrl += '&mob=js';
 }
 
+if (data.impressionTracking) {
+  requestUrl += '&d_imp=1&d_imp_hdr=1';
+}
+
 // Google Ad Manager Tagless Request Logic
 if (requestPath === gamRequestPath) {
   
@@ -222,8 +232,20 @@ if (requestPath === gamRequestPath) {
       setResponseStatus(result.statusCode);
       setResponseBody(result.body);
       returnResponse();
+    
+      if (data.impressionTracking) {
+        const impressionUrl = result.headers['google-delayed-impression'];
+        
+        sendHttpGet(impressionUrl)
+          .then((result) => {
+            log('Impression Tracking Ping successful');
+          })
+          .catch((error) => {
+            log(error);
+          });
+      }
     })
-    .catch(error => {
+    .catch((error) => {
        log(error);
     });
 }
@@ -357,6 +379,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 7.3.2023, 15:56:17
+Created on 9.3.2023, 15:09:32
 
 
