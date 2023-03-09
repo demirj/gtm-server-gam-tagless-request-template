@@ -73,10 +73,11 @@ In GTM UI go to "Clients", click on "New" and select the imported Client-Templat
 - **Set custom Ad Host**: Set a custom host for the ad request. Default value is the hostname of incoming request. This is only required for MCM requests.
 - **Mobile Ad**: Set the indicator, that the request is a mobile ad request.
 - **Set custom Access-Control-Allow-Origin (ACAO) header**: If not specified, a wildcard (*) will be used as default value.
+- **Activate Impression Tracking**: Enable impression tracking.
 
 ## Editing history
+- 2023/09/03: Added option to enable impression tracking
 - 2023/08/03: Initial release.
 
 ## Current Backlog of Template
-- Impression Tracking
 - Key-Value pairs for Targeting
