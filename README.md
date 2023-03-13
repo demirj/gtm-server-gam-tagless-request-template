@@ -74,8 +74,10 @@ In GTM UI go to "Clients", click on "New" and select the imported Client-Templat
 - **Mobile Ad**: Set the indicator, that the request is a mobile ad request.
 - **Set custom Access-Control-Allow-Origin (ACAO) header**: If not specified, a wildcard (*) will be used as default value.
 - **Activate Impression Tracking**: Enable impression tracking.
+- **Set Mime Type**: Add a specific mime-type in the HTTP request like "text/html" or similar.
 
 ## Editing history
+- 2023/13/03: Added option to set mime-type in HTTP request
 - 2023/09/03: Added option to enable impression tracking
 - 2023/08/03: Initial release.
 
