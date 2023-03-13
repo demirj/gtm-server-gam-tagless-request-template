@@ -6,7 +6,6 @@
   "version": 1,
   "securityGroups": [],
   "displayName": "Google Ad Manager - Tagless Request",
-  "categories": ["TAG_MANAGEMENT", "MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": ""
@@ -118,6 +117,11 @@ ___TEMPLATE_PARAMETERS___
             "paramValue": true,
             "type": "EQUALS"
           }
+        ],
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
         ]
       },
       {
@@ -133,6 +137,31 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Activate Impression Tracking",
         "simpleValueType": true,
         "help": "If enabled you can track downloaded impressions, also known as \"delayed\" impressions."
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "customMimeType",
+        "checkboxText": "Set Mime Type",
+        "simpleValueType": true,
+        "help": "Mime-type value for the HTTP request. Example value: \u003cstrong\u003etext/html\u003c/strong\u003e"
+      },
+      {
+        "type": "TEXT",
+        "name": "mimeType",
+        "displayName": "Mime-type",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "customMimeType",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
       }
     ]
   },
@@ -202,6 +231,7 @@ const creativeSize = data.creativeSize;
 const adUnitPath = '/' + networkCode + '/' + adUnitCode;
 const tagPosition = 1;
 const acaoHeaderValue = data.acaoValue || '*';
+const mimeType = data.mimeType;
 
 // Build request string for creative sizes
 let creativeSizesCombined = [];
@@ -221,6 +251,12 @@ if (data.mobileAd) {
 if (data.impressionTracking) {
   requestUrl += '&d_imp=1&d_imp_hdr=1';
 }
+
+if (data.customMimeType) {
+  requestUrl += '&m=' + mimeType;
+}
+
+log(requestUrl);
 
 // Google Ad Manager Tagless Request Logic
 if (requestPath === gamRequestPath) {
@@ -380,6 +416,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 9.3.2023, 15:09:32
+Created on 13.3.2023, 15:35:22
 
 
