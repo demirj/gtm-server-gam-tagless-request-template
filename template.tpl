@@ -6,7 +6,6 @@
   "version": 1,
   "securityGroups": [],
   "displayName": "Google Ad Manager - Tagless Request",
-  "categories": ["TAG_MANAGEMENT", "MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": ""
@@ -163,6 +162,68 @@ ___TEMPLATE_PARAMETERS___
             "type": "NON_EMPTY"
           }
         ]
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "customTargeting",
+        "checkboxText": "Set slot-level key-value pairs for targeting",
+        "simpleValueType": true,
+        "help": "Activate this option to set key-value pairs for targeting in the HTTP tagless request."
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "targeting",
+        "displayName": "Key-value pairs",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Key",
+            "name": "key",
+            "type": "TEXT",
+            "valueValidators": [
+              {
+                "type": "REGEX",
+                "args": [
+                  "^[^\"!\u0027\\+#\\*~;\\^\\(\\)\u003c\u003e\\[\\]\u003d]*$"
+                ],
+                "errorMessage": "The following characters are not permitted in keys: \" \u0027 ! + # * ~ ; ^ ( ) \u003c \u003e [ ] \u003d"
+              }
+            ],
+            "valueHint": ""
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Value",
+            "name": "value",
+            "type": "TEXT",
+            "valueValidators": [
+              {
+                "type": "REGEX",
+                "args": [
+                  "^[^\"!\u0027\\+#\\*~;\\^\\(\\)\u003c\u003e\\[\\]\u003d]*$"
+                ],
+                "errorMessage": "The following characters are not permitted in values: \" \u0027 ! + # * ~ ; ^ ( ) \u003c \u003e [ ] \u003d"
+              }
+            ],
+            "valueHint": ""
+          }
+        ],
+        "enablingConditions": [
+          {
+            "paramName": "customTargeting",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+          {
+            "type": "TABLE_ROW_COUNT",
+            "args": [
+              1
+            ]
+          }
+        ],
+        "help": "The following characters are not permitted in keys and values: \" \u0027 ! + # * ~ ; ^ ( ) \u003c \u003e [ ] \u003d"
       }
     ]
   },
@@ -216,6 +277,7 @@ const setResponseBody = require('setResponseBody');
 const setResponseHeader = require('setResponseHeader');
 const returnResponse = require('returnResponse');
 const encodeUri = require('encodeUri');
+const encodeUriComponent = require('encodeUriComponent');
 const log = require('logToConsole');
 
 // Request and general Data
@@ -257,13 +319,23 @@ if (data.customMimeType) {
   requestUrl += '&m=' + mimeType;
 }
 
-log(requestUrl);
+if (data.customTargeting) {
+  const targeting = data.targeting;
+  let customTargetingCombined = [];
+  targeting.forEach((t, i) => {
+    customTargetingCombined.push(t.key + '=' + encodeUriComponent(t.value));
+  });
+
+  const customTargetingRequestString = encodeUriComponent(customTargetingCombined.join('&'));
+  
+  requestUrl += '&t=' + customTargetingRequestString;
+}
 
 // Google Ad Manager Tagless Request Logic
 if (requestPath === gamRequestPath) {
   
   claimRequest();
-    
+      
   sendHttpGet(requestUrl)
     .then((result) => {
       setResponseHeader('Access-Control-Allow-Origin', acaoHeaderValue);
@@ -417,6 +489,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 13.3.2023, 15:35:22
+Created on 17.3.2023, 14:56:04
 
 
