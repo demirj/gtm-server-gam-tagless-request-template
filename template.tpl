@@ -6,7 +6,6 @@
   "version": 1,
   "securityGroups": [],
   "displayName": "Google Ad Manager - Tagless Request",
-  "categories": ["TAG_MANAGEMENT", "MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": ""
@@ -138,6 +137,13 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Activate Impression Tracking",
         "simpleValueType": true,
         "help": "If enabled you can track downloaded impressions, also known as \"delayed\" impressions."
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "thirdPartyImpressionTracking",
+        "checkboxText": "Activate Third-Party Impression Tracking",
+        "simpleValueType": true,
+        "help": "If the creative contains a third-party impression tracking URL, this option will send the impression ping."
       },
       {
         "type": "CHECKBOX",
@@ -345,7 +351,7 @@ if (requestPath === gamRequestPath) {
       returnResponse();
     
       if (data.impressionTracking) {
-        const impressionUrl = result.headers['google-delayed-impression'];
+        const impressionUrl = result.headers['google-delayed-impression'] || '';
         
         sendHttpGet(impressionUrl)
           .then((result) => {
@@ -355,6 +361,19 @@ if (requestPath === gamRequestPath) {
             log(error);
           });
       }
+    
+      if (data.thirdPartyImpressionTracking) {
+        const thirdPartyImpressionUrl = result.headers['google-3rdparty-delayed-impression'] || '';
+        
+        sendHttpGet(thirdPartyImpressionUrl)
+          .then((result) => {
+            log('Third-Party Impression Tracking Ping successful');
+          })
+          .catch((error) => {
+            log(error);
+          });
+      }
+    
     })
     .catch((error) => {
        log(error);
@@ -490,6 +509,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 17.3.2023, 14:56:04
+Created on 20.3.2023, 19:41:43
 
 
