@@ -76,9 +76,11 @@ In GTM UI go to "Clients", click on "New" and select the imported Client-Templat
 - **Activate Impression Tracking**: Enable impression tracking.
 - **Activate Third-Party Impression Tracking**: Enable third-party impression tracking, if present in the creative.
 - **Set Mime Type**: Add a specific mime-type in the HTTP request like "text/html" or similar.
+- **Set a mobile device screen width and height.**: Enabling this option will send the mobile device screen width and height in the request. Please ensure to send this information to serverside GTM and to set the corresponding value through a variable.
 - **Set slot-level key-value pairs for targeting**: Set your targeting key-values here.
 
 ## Editing history
+- 2023/25/03: Added option to set a mobile device screen width and height.
 - 2023/20/03: Third-Party Impression Tracking added.
 - 2023/17/03: Support of setting slot-level key-value pairs for targeting
 - 2023/13/03: Added option to set mime-type in HTTP request
