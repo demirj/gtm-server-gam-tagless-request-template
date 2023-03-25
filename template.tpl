@@ -6,7 +6,6 @@
   "version": 1,
   "securityGroups": [],
   "displayName": "Google Ad Manager - Tagless Request",
-  "categories": ["TAG_MANAGEMENT", "MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": ""
@@ -173,6 +172,41 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "CHECKBOX",
+        "name": "setMobileScreenSize",
+        "checkboxText": "Set a mobile device screen width and height.",
+        "simpleValueType": true,
+        "help": "Enabling this option will send the mobile device screen width and height in the request. Please ensure to send this information to serverside GTM and to set the corresponding value through a variable."
+      },
+      {
+        "type": "TEXT",
+        "name": "mobileWidth",
+        "displayName": "Mobile device screen width",
+        "simpleValueType": true,
+        "help": "Provide a value for the mobile device screen width.",
+        "enablingConditions": [
+          {
+            "paramName": "setMobileScreenSize",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "mobileHeight",
+        "displayName": "Mobile device screen height",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "setMobileScreenSize",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ],
+        "help": "Provide a value for the mobile device screen height."
+      },
+      {
+        "type": "CHECKBOX",
         "name": "customTargeting",
         "checkboxText": "Set slot-level key-value pairs for targeting",
         "simpleValueType": true,
@@ -327,6 +361,10 @@ if (data.customMimeType) {
   requestUrl += '&m=' + mimeType;
 }
 
+if (data.setMobileScreenSize) {
+  requestUrl += '&u_w=' + data.mobileWidth + '&u_h=' + data.mobileHeight;
+}
+
 if (data.customTargeting) {
   const targeting = data.targeting;
   let customTargetingCombined = [];
@@ -340,6 +378,10 @@ if (data.customTargeting) {
 }
 
 // Google Ad Manager Tagless Request Logic
+if (requestPath !== gamRequestPath) {
+  return;
+}
+
 if (requestPath === gamRequestPath) {
   
   claimRequest();
@@ -510,6 +552,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 20.3.2023, 19:41:43
+Created on 25.3.2023, 08:33:54
 
 
