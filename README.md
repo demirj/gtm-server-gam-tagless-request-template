@@ -4,6 +4,25 @@ This serverside Google Tag Manager Client-Template lets you perform an ad reques
 
 - Google Ad Manager Help: https://support.google.com/admanager/answer/2623168?hl=en
 
+## How it works - Visualization
+
+![Flow Chart](https://www.demirjasarevic.com/wp-content/uploads/2023/04/gam-client-sgtm.png)
+
+Explaination:
+
+- First the browser sends a request to serverside Google Tag Manager in a first-party-context
+- The Google Ad Manager Client within Google Tag Manager receives the request and based on data and information provided through Template, the Client makes an request to Google Ad Manager
+- Google Ad Manager responds with the creative and sends it back to serverside Google Tag Manager
+- Google Tag Manager sends the response back to the browser
+- The browser parses the response and renders the creative into the Ad Slot
+
+## Use Case
+
+It is generally recommended to use Google Publisher Tags for displaying Ads. Still, there are some cases where a tagless request on a website needs to be made. E.g.
+
+- If the Limited Ads option is not a solution as a fallback for unconsented users (see https://support.google.com/admanager/answer/9882911?hl=en)
+- You want to request (or proxy) the request through a first-party-context
+
 ## How to import this template
 
 1. Download file "template.tpl" from this repository
