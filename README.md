@@ -6,7 +6,7 @@ This serverside Google Tag Manager Client-Template lets you perform an ad reques
 
 ## How it works - Visualization 
 
-![Flow Chart](https://www.demirjasarevic.com/wp-content/uploads/2023/04/gam-client-sgtm-flow.png)
+![Flow Chart](https://www.demirjasarevic.com/wp-content/uploads/2023/04/gam-client-sgtm-flow-imp.png)
 
 Explaination:
 
