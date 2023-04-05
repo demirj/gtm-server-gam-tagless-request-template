@@ -46,16 +46,16 @@ One main requirement to use this Client template in Google Tag Manager Server-Co
 
 ```js
 <div id="tagless-request">
-    <script>
-        fetch('https://your.serverside-gtm.com/gam')
-          .then((response) => {
-            return response.text();
-          })
-          .then((text) => {
-            document.getElementById("tagless-request").innerHTML = text;  
-          });
-    </script>
 </div>
+<script>
+    fetch('https://your.serverside-gtm.com/gam')
+      .then((response) => {
+        return response.text();
+      })
+      .then((text) => {
+        document.getElementById("tagless-request").innerHTML = text;  
+      });
+</script>
 ```
 **There are some important aspects here:**
 - Replace "your.serverside-gtm.com" with your serverside Google Tag Manager endpoint.
@@ -66,20 +66,20 @@ One main requirement to use this Client template in Google Tag Manager Server-Co
 *Request with X-Gtm-Server-Preview header:*
 ```js
 <div id="tagless-request">
-    <script>
-        fetch('https://your.serverside-gtm.com/gam', {
-          headers: {
-            "X-Gtm-Server-Preview": "XXX" // Add your value here
-          }
-         })
-          .then((response) => {
-            return response.text();
-          })
-          .then((text) => {
-            document.getElementById("tagless-request").innerHTML = text;  
-          });
-    </script>
 </div>
+<script>
+    fetch('https://your.serverside-gtm.com/gam', {
+     headers: {
+       "X-Gtm-Server-Preview": "XXX" // Add your value here
+     }
+    })
+     .then((response) => {
+       return response.text();
+     })
+     .then((text) => {
+       document.getElementById("tagless-request").innerHTML = text;  
+     });
+</script>
 ```
 
 ### Setup Client
