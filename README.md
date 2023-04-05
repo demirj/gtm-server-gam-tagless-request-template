@@ -15,6 +15,7 @@ Explaination:
 - Google Ad Manager responds with the creative and sends it back to serverside Google Tag Manager
 - Google Tag Manager sends the response back to the browser
 - The browser parses the response and renders the creative into the Ad Slot
+- Optionally the Google Tag Manager can send an impression ping back to the Ad Server
 
 ## Use Case
 
