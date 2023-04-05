@@ -3,7 +3,6 @@
 This serverside Google Tag Manager Client-Template lets you perform an ad request to Google Ad Manager without using Google Publisher Tags in the Frontend. Please read more about Google Ad Manager Tagless Request here:
 
 - Google Ad Manager Help: https://support.google.com/admanager/answer/2623168?hl=en
-- demirjasarevic.com Blog (German): https://www.demirjasarevic.com/google-ad-manager-tagless-request/
 
 ## How to import this template
 
@@ -66,18 +65,20 @@ One main requirement to use this Client template in Google Tag Manager Server-Co
 ### Setup Client
 In GTM UI go to "Clients", click on "New" and select the imported Client-Template. Then you have different fields to set up:
 
+![Screenshot of Template](https://www.demirjasarevic.com/wp-content/uploads/2023/04/gam-client-sgtm.png)
+
 - **"Request Path":** Please set the request path you are using to initiate the request here. So if you are using e.g. "https://your.serverside-gtm.com/gam" in the fetch-command, then set here "/gam" as value.
 - **Network Code:** Add your Google Ad Manager network code here. You can also use MCM with the parent, child structure, e.g. "123,456".
 - **Ad Unit Code**: Add your add unit code, provided by Google Ad Manager, here.
 - **Creative Size**: Specify the creative sizes to request from the ad server here.
 - **Set custom Ad Host**: Set a custom host for the ad request. Default value is the hostname of incoming request. This is only required for MCM requests.
 - **Mobile Ad**: Set the indicator, that the request is a mobile ad request.
-- **Set custom Access-Control-Allow-Origin (ACAO) header**: If not specified, a wildcard (*) will be used as default value.
 - **Activate Impression Tracking**: Enable impression tracking.
 - **Activate Third-Party Impression Tracking**: Enable third-party impression tracking, if present in the creative.
 - **Set Mime Type**: Add a specific mime-type in the HTTP request like "text/html" or similar.
 - **Set a mobile device screen width and height.**: Enabling this option will send the mobile device screen width and height in the request. Please ensure to send this information to serverside GTM and to set the corresponding value through a variable.
 - **Set slot-level key-value pairs for targeting**: Set your targeting key-values here.
+- **Set custom Access-Control-Allow-Origin (ACAO) header**: If not specified, a wildcard (*) will be used as default value.
 
 ## Editing history
 - 2023/25/03: Added option to set a mobile device screen width and height.
