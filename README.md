@@ -85,7 +85,7 @@ One main requirement to use this Client template in Google Tag Manager Server-Co
 ### Setup Client
 In GTM UI go to "Clients", click on "New" and select the imported Client-Template. Then you have different fields to set up:
 
-![Screenshot of Template](https://www.demirjasarevic.com/wp-content/uploads/2023/04/gam-client-sgtm.png)
+![Screenshot of Template](https://www.demirjasarevic.com/wp-content/uploads/2023/04/gam-client-sgtm-ui.png)
 
 - **"Request Path":** Please set the request path you are using to initiate the request here. So if you are using e.g. "https://your.serverside-gtm.com/gam" in the fetch-command, then set here "/gam" as value.
 - **Network Code:** Add your Google Ad Manager network code here. You can also use MCM with the parent, child structure, e.g. "123,456".
