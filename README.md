@@ -4,6 +4,8 @@ This serverside Google Tag Manager Client-Template lets you perform an ad reques
 
 - Google Ad Manager Help: https://support.google.com/admanager/answer/2623168?hl=en
 
+__Caution: This is not a official supported way to deliver creatives. Please always first check the policies whether you can use this in production (and testing) mode. Use at your own risk.__ 
+
 ## How it works - Visualization 
 
 ![Flow Chart](https://www.demirjasarevic.com/wp-content/uploads/2023/04/gam-client-sgtm-flow-imp.png)
