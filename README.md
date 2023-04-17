@@ -19,13 +19,6 @@ Explaination:
 - The browser parses the response and renders the creative into the Ad Slot
 - Optionally the Google Tag Manager can send an impression ping back to the Ad Server
 
-## Use Case
-
-It is generally recommended to use Google Publisher Tags for displaying Ads. Still, there are some cases where a tagless request on a website needs to be made. E.g.
-
-- If the Limited Ads option is not a solution as a fallback for unconsented users (see https://support.google.com/admanager/answer/9882911?hl=en)
-- You want to request (or proxy) the request through a first-party-context
-
 ## How to import this template
 
 1. Download file "template.tpl" from this repository
