@@ -1,4 +1,12 @@
-﻿___INFO___
+﻿___TERMS_OF_SERVICE___
+
+By creating or modifying this file you agree to Google Tag Manager's Community
+Template Gallery Developer Terms of Service available at
+https://developers.google.com/tag-manager/gallery-tos (or such other URL as
+Google may provide), as modified from time to time.
+
+
+___INFO___
 
 {
   "type": "CLIENT",
@@ -6,7 +14,6 @@
   "version": 1,
   "securityGroups": [],
   "displayName": "Google Ad Manager - Tagless Request",
-  "categories": ["TAG_MANAGEMENT", "MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": ""
@@ -267,6 +274,13 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "help": "The following characters are not permitted in keys and values: \" \u0027 ! + # * ~ ; ^ ( ) \u003c \u003e [ ] \u003d"
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "remoteData",
+        "checkboxText": "Prevent sending Remote Adress and User Agent from Origin",
+        "simpleValueType": true,
+        "help": "If enabled, the IP address and User Agent from the origin will not be sent in the outgoing request. \u003cstrong\u003eUse with caution.\u003c/strong\u003e"
       }
     ]
   },
@@ -321,6 +335,7 @@ const setResponseHeader = require('setResponseHeader');
 const returnResponse = require('returnResponse');
 const encodeUri = require('encodeUri');
 const encodeUriComponent = require('encodeUriComponent');
+const remoteAddress = require('getRemoteAddress');
 const log = require('logToConsole');
 
 // Request and general Data
@@ -328,6 +343,8 @@ const requestPath = getRequestPath();
 const cacheBusting = Math.round(getTimestampMillis() / 1000);
 const adHost = data.adHost || getRequestHeader('host');
 const gamEndpoint = 'https://securepubads.g.doubleclick.net/gampad/adx?';
+const userIp = remoteAddress();
+const userAgent = getRequestHeader('User-Agent');
 
 // User Data
 const gamRequestPath = data.gamRequestPath;
@@ -338,6 +355,8 @@ const adUnitPath = '/' + networkCode + '/' + adUnitCode;
 const tagPosition = 1;
 const acaoHeaderValue = data.acaoValue || '*';
 const mimeType = data.mimeType;
+const remoteData = data.remoteData;
+let requestHeadersOrigin = {};
 
 // Build request string for creative sizes
 let creativeSizesCombined = [];
@@ -383,13 +402,20 @@ if (requestPath !== gamRequestPath) {
   return;
 }
 
+if (!remoteData) {
+  requestHeadersOrigin['User-Agent'] = userAgent;
+  requestHeadersOrigin['X-Forwarded-For'] = userIp;
+}  
+
 if (requestPath === gamRequestPath) {
   
   claimRequest();
       
-  sendHttpGet(requestUrl)
+  sendHttpGet(requestUrl, {
+    headers: requestHeadersOrigin
+  })
     .then((result) => {
-      setResponseHeader('Access-Control-Allow-Origin', acaoHeaderValue);
+      setResponseHeader('Access-Control-Allow-Origin', acaoHeaderValue);    
       setResponseStatus(result.statusCode);
       setResponseBody(result.body);
       returnResponse();
@@ -553,6 +579,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 25.3.2023, 08:33:54
+Created on 29.3.2023, 14:55:54
 
 
