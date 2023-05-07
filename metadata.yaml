@@ -1,5 +1,5 @@
 homepage: "https://www.demirjasarevic.com/"
 documentation: "https://github.com/demirj/gtm-server-gam-tagless-request-template/blob/main/README.md"
 versions:
-  - sha: fc3557038088ca011b31ecb62db7713aa84338f3
-    changeNotes: Initial release.
+  - sha: 88f71e4ccc648b3a76e815cbc2ef0fd20d1b5684
+    changeNotes: Add categories in template file.
