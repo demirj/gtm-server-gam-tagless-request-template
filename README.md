@@ -96,6 +96,7 @@ In GTM UI go to "Clients", click on "New" and select the imported Client-Templat
 - **Set custom Access-Control-Allow-Origin (ACAO) header**: If not specified, a wildcard (*) will be used as default value.
 
 ## Editing history
+- 2023/07/05: Handling Remote IP and User Agent
 - 2023/25/03: Added option to set a mobile device screen width and height.
 - 2023/20/03: Third-Party Impression Tracking added.
 - 2023/17/03: Support of setting slot-level key-value pairs for targeting
